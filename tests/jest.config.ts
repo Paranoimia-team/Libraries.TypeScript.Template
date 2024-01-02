@@ -1,4 +1,4 @@
-import { JestConfigWithTsJest } from "ts-jest"
+import { JestConfigWithTsJest } from "ts-jest";
 
 const config: JestConfigWithTsJest = {
     preset: 'ts-jest',
@@ -6,6 +6,11 @@ const config: JestConfigWithTsJest = {
     testEnvironment: 'node',
     passWithNoTests: true,
     verbose: true,
+    testMatch: [
+        "**/tests/**/*.ts?(x)",
+        "!**/tests/jest.config.ts",
+        "!**/tests/setup.ts"
+    ],
     setupFiles: [
         './tests/setup.ts'
     ]
