@@ -19,7 +19,7 @@ jobs:
         owner: ${{ github.repository_owner }}
         repository: ${{ github.event.repository.name }}
         ruleset_path: '${{ github.workspace }}/.github/rulesets/main.json'
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.ORGANIZATION_TOKEN }}
     
     - name: 'Add repository to Paranoimia team'
       uses: paranoimia-team/libraries.github.actions/github/add-repository-to-team@main
@@ -28,7 +28,7 @@ jobs:
         owner: ${{ github.repository_owner }}
         repository: ${{ github.event.repository.name }}
         team_slug: 'paranoimia'
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.ORGANIZATION_TOKEN }}
     
     - name: 'Get libraries node_id'
       id: libraries
@@ -36,12 +36,12 @@ jobs:
       with:
         organization: ${{ github.event.organization.login }}
         project: ${{ vars.PROJECT_LIBRARIES_NUMBER }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.ORGANIZATION_TOKEN }}
 
     - name: 'Link repository to Libraries'
       uses: paranoimia-team/libraries.github.actions/github/link-repository-to-project@main
       with:
         project: ${{ steps.libraries.outputs.node_id }}
         repository: ${{ github.event.repository.node_id }}
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.ORGANIZATION_TOKEN }}
   
