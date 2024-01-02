@@ -29,6 +29,7 @@ jobs:
         repository: ${{ github.event.repository.name }}
         team_slug: 'paranoimia'
         token: ${{ secrets.ORGANIZATION_TOKEN }}
+        permission: 'admin'
     
     - name: 'Get libraries node_id'
       id: libraries
