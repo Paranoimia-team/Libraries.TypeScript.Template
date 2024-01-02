@@ -20,6 +20,7 @@ jobs:
         owner: ${{ github.repository_owner }}
         token: ${{ secrets.ORGANIZATION_TOKEN }}
         delete_branch_on_merge: true
+        allow_auto_merge: true
 
     - name: 'Import default ruleset'
       uses: paranoimia-team/libraries.github.actions/github/create-ruleset@main
