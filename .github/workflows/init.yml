@@ -6,11 +6,11 @@ on:
 jobs:
   setup_library:
     if: ${{ github.event.ref == github.event.master_branch }}
-    name: Import ruleset
+    name: Setup library
     runs-on: ubuntu-latest
     steps:
 
-    - name: checkout
+    - name: Checkout
       uses: actions/checkout@v4
       
     - name: 'Update repository properties'
