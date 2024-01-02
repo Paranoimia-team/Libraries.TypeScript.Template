@@ -13,6 +13,14 @@ jobs:
     - name: checkout
       uses: actions/checkout@v4
       
+    - name: 'Update repository properties'
+      uses: paranoimia-team/libraries.github.actions/github/update-repository@main
+      with:
+        repository: ${{ github.event.repository.name }}
+        owner: ${{ github.repository_owner }}
+        token: ${{ secrets.ORGANIZATION_TOKEN }}
+        delete_branch_on_merge: true
+
     - name: 'Import default ruleset'
       uses: paranoimia-team/libraries.github.actions/github/create-ruleset@main
       with:
