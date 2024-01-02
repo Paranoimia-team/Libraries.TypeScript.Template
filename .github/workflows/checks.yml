@@ -1,0 +1,23 @@
+name: checks
+on:
+  check_run:
+    
+  pull_request: 
+    types: [opened, synchronize]
+jobs:     
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: setup
+      uses: paranoimia-team/actions/typescript/setup@main
+
+    - name: restore
+      uses: paranoimia-team/actions/typescript/restore@main
+
+    - name: build
+      uses: paranoimia-team/actions/typescript/build@main
+
+    - name: test
+      uses: paranoimia-team/actions/typescript/test@main
+  

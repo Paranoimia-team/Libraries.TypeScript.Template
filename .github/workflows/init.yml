@@ -1,0 +1,47 @@
+name: Setup repository
+
+on:
+  create
+
+jobs:
+  setup_library:
+    if: ${{ github.event.ref == github.event.master_branch }}
+    name: Import ruleset
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: checkout
+      uses: actions/checkout@v4
+      
+    - name: 'Import default ruleset'
+      uses: paranoimia-team/libraries.github.actions/github/create-ruleset@main
+      with:
+        owner: ${{ github.repository_owner }}
+        repository: ${{ github.event.repository.name }}
+        ruleset_path: '${{ github.workspace }}/.github/rulesets/main.json'
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: 'Add repository to Paranoimia team'
+      uses: paranoimia-team/libraries.github.actions/github/add-repository-to-team@main
+      with:
+        organization: ${{ github.repository_owner }}
+        owner: ${{ github.repository_owner }}
+        repository: ${{ github.event.repository.name }}
+        team_slug: 'paranoimia'
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: 'Get libraries node_id'
+      id: libraries
+      uses: paranoimia-team/libraries.github.actions/github/get-project-node-id@main
+      with:
+        organization: ${{ github.event.organization.login }}
+        project: ${{ vars.PROJECT_LIBRARIES_NUMBER }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: 'Link repository to Libraries'
+      uses: paranoimia-team/libraries.github.actions/github/link-repository-to-project@main
+      with:
+        project: ${{ steps.libraries.outputs.node_id }}
+        repository: ${{ github.event.repository.node_id }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+  
